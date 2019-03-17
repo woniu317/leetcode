@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
+func main() {
+	fmt.Println(generateParenthesis(2))
+	fmt.Println(generateParenthesis(3))
+}
 func generateParenthesis(n int) []string {
 	str := make([]string, 2*n)
 	for i := 0; i < n; i++ {
@@ -11,17 +18,9 @@ func generateParenthesis(n int) []string {
 	return permission(str, 0, 2*n, 0)
 }
 
-func main() {
-	fmt.Println(generateParenthesis(2))
-	fmt.Println(generateParenthesis(3))
-}
-
 func permission(str []string, start, end int, num int) []string {
 	if end == start+1 {
-		result := ""
-		for _, va := range str {
-			result += va
-		}
+		result := strings.Join(str, "")
 		return []string{result}
 	}
 	result := make([]string, 0)
@@ -42,7 +41,7 @@ func permission(str []string, start, end int, num int) []string {
 			return result
 		}
 		for i := start + 1; i < end; i++ {
-			if str[i] != str[i-1] {
+			if str[i] != str[start] {
 				str[start], str[i] = str[i], str[start]
 				result = append(result[:], permission(str, start+1, end, num+1)[:]...)
 				str[start], str[i] = str[i], str[start]
@@ -55,7 +54,7 @@ func permission(str []string, start, end int, num int) []string {
 				result = append(result[:], permission(str, start+1, end, num+1)[:]...)
 				continue
 			}
-			if str[i] != str[i-1] {
+			if str[i] != str[start] {
 				str[start], str[i] = str[i], str[start]
 				result = append(result[:], permission(str, start+1, end, num+1)[:]...)
 				str[start], str[i] = str[i], str[start]
