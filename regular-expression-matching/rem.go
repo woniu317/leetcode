@@ -16,7 +16,7 @@ func isMatch(s string, p string) bool {
 }
 
 func match(s, p string, sIndex, pIndex int) bool {
-	matchResult := -1
+	matchResult := NotMatch
 	fmt.Println(sIndex, pIndex)
 	if result[sIndex][pIndex] == Default {
 		if len(p) == pIndex {
@@ -43,7 +43,7 @@ func match(s, p string, sIndex, pIndex int) bool {
 		result[sIndex][pIndex] = matchResult
 	}
 
-	return result[sIndex][pIndex] == 1
+	return result[sIndex][pIndex] == Match
 }
 
 func initArray(s string, p string) {
